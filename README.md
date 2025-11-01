@@ -95,6 +95,8 @@ app.include_router(router)
 
 ## Production Deployment
 
+### Standard Deployment
+
 1. Set `API_DEBUG=false` in production
 2. Configure CORS appropriately (currently set to allow all origins)
 3. Use a production ASGI server:
@@ -102,6 +104,19 @@ app.include_router(router)
    uvicorn main:app --host 0.0.0.0 --port 8000 --workers 4
    ```
 4. Use a reverse proxy (nginx, Traefik) for SSL termination
+
+### Vercel Deployment (Optimized)
+
+This project is optimized for Vercel deployment. **Important**: Vercel has a 250 MB unzipped size limit.
+
+**For Vercel deployment:**
+1. Use `requirements-vercel.txt` instead of `requirements.txt`
+2. The `vercel.json` file is configured to exclude unnecessary files
+3. See `VERCEL_DEPLOYMENT.md` for detailed deployment instructions
+
+**If size still exceeds limit:**
+- Consider deploying backend on Railway or Render (see `VERCEL_DEPLOYMENT.md`)
+- Use the minimal proxy (`minimal_vercel_proxy.py`) to forward requests to backend
 
 ## Troubleshooting
 

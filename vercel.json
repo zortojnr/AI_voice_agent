@@ -1,0 +1,72 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "main.py",
+      "use": "@vercel/python"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "main.py"
+    }
+  ],
+  "env": {
+    "PYTHON_VERSION": "3.13"
+  },
+  "functions": {
+    "main.py": {
+      "includeFiles": "**/*.py",
+      "excludeFiles": "**/tests/**",
+      "maxDuration": 30
+    }
+  },
+  "ignore": [
+    ".git",
+    ".gitignore",
+    ".venv",
+    "venv",
+    "env",
+    "__pycache__",
+    "*.pyc",
+    "*.pyo",
+    "*.pyd",
+    ".pytest_cache",
+    ".mypy_cache",
+    "*.log",
+    ".env",
+    ".env.local",
+    "*.md",
+    "docs",
+    "tests",
+    "test_*.py",
+    "*_test.py",
+    "requirements.txt",
+    "example_router.py",
+    ".vscode",
+    ".idea",
+    "*.swp",
+    "*.swo",
+    ".DS_Store",
+    "Thumbs.db",
+    "models",
+    "*.pt",
+    "*.bin",
+    "*.onnx",
+    "*.pth",
+    "*.h5",
+    "*.pb",
+    "*.ckpt",
+    "checkpoints",
+    "data",
+    "datasets",
+    "logs",
+    "dist",
+    "build",
+    "*.egg-info",
+    ".cache",
+    "node_modules"
+  ]
+}
+
