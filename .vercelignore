@@ -1,0 +1,82 @@
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
+.venv
+
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# Testing
+.pytest_cache/
+.mypy_cache/
+tests/
+test_*.py
+*_test.py
+.coverage
+htmlcov/
+
+# Model files (heavy ML models)
+*.pt
+*.bin
+*.onnx
+*.pth
+*.h5
+*.pb
+*.ckpt
+models/
+checkpoints/
+data/
+datasets/
+
+# Build artifacts
+build/
+dist/
+*.egg-info/
+.eggs/
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+logs/
+
+# Documentation (optional - include if needed)
+# *.md
+# docs/
+
+# Development files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Git
+.git/
+.gitignore
+
+# Cache
+.cache/
+
+# Node modules (if any)
+node_modules/
+
