@@ -1,0 +1,37 @@
+# Backend requirements for Railway/Render deployment
+# This includes livekit-agents and can exceed Vercel's 250 MB limit
+# Deploy this backend on Railway (500 MB limit) or Render (750 MB limit)
+#
+# Usage:
+#   1. Deploy backend with this requirements file on Railway/Render
+#   2. Deploy Vercel frontend with requirements-vercel.txt (minimal)
+#   3. Use minimal_vercel_proxy.py or API calls to connect them
+
+# Core FastAPI and ASGI server
+fastapi>=0.104.0
+uvicorn>=0.24.0
+pydantic>=2.5.0
+pydantic-settings>=2.1.0
+
+# LiveKit dependencies (full - includes agents)
+livekit>=0.11.0
+livekit-agents>=0.9.0
+
+# Environment management
+python-dotenv>=1.0.0
+
+# Async HTTP client
+httpx>=0.25.0
+
+# Optional: API-based plugins (recommended over local models)
+# livekit-plugins-openai  # Use OpenAI APIs instead of local models
+# livekit-plugins-deepgram  # Use Deepgram APIs instead of local models
+
+# NOTE: If you need local ML models (torch, transformers, whisper), add them here
+# but be aware they will significantly increase bundle size:
+# - torch: ~500+ MB
+# - transformers: ~100-200 MB
+# - whisper: ~100+ MB
+#
+# Recommended: Use API-based services instead of local models
+

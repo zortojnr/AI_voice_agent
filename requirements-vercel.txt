@@ -1,5 +1,14 @@
-# Optimized requirements for Vercel deployment
-# This version minimizes dependencies to stay under 250 MB limit
+# Ultra-minimal requirements for Vercel deployment (stays under 250 MB limit)
+# 
+# NOTE: This removes livekit-agents which can pull in PyTorch (500+ MB) and
+# Transformers (100-200 MB) as optional dependencies.
+#
+# For voice agent functionality, deploy the backend with livekit-agents on:
+# - Railway (recommended): 500 MB limit, free tier
+# - Render: 750 MB limit, free tier
+# - Fly.io: No specific limit, free tier
+#
+# Use minimal_vercel_proxy.py to forward requests from Vercel to your backend.
 
 # Core FastAPI and ASGI server (minimal)
 fastapi==0.115.0
@@ -7,10 +16,10 @@ uvicorn==0.34.0  # Minimal version without [standard] extras
 pydantic==2.9.2
 pydantic-settings==2.6.0
 
-# LiveKit dependencies (core only - no ML model dependencies)
+# LiveKit core (lightweight - for API communication only)
 livekit==0.11.2
-# Note: livekit-agents may pull heavy deps - consider API-based approach
-livekit-agents==0.10.1
+# livekit-agents removed - deploy backend separately on Railway/Render
+# livekit-agents==0.10.1  # Moved to backend deployment
 
 # Environment management
 python-dotenv==1.0.1
@@ -18,7 +27,12 @@ python-dotenv==1.0.1
 # Async HTTP client (lightweight)
 httpx==0.27.2
 
-# Removed heavy optional dependencies:
-# - structlog (logging can use stdlib)
-# - uvicorn[standard] extras (includes watchfiles, websockets which add size)
-
+# Explicitly excluded heavy dependencies:
+# - torch (PyTorch) - ~500+ MB
+# - transformers - ~100-200 MB  
+# - whisper - ~100+ MB
+# - pydub - ~20-30 MB
+# - speechrecognition - ~10-20 MB
+# - numpy - typically included but manageable
+#
+# If you need these, deploy backend on Railway/Render and use API calls

@@ -33,12 +33,17 @@ async def lifespan(app: FastAPI):
     logger.info(f"Starting {settings.api_title} v{settings.api_version}")
     logger.info(f"LiveKit URL: {settings.livekit_url}")
     
-    # Verify LiveKit agents can be imported
+    # Verify LiveKit agents can be imported (optional on Vercel)
+    # Note: livekit-agents is not included in requirements-vercel.txt to stay under 250 MB
+    # Deploy backend with livekit-agents on Railway/Render and use minimal_vercel_proxy.py
     try:
         from livekit import agents
         logger.info("✓ LiveKit agents imported successfully")
     except ImportError as e:
-        logger.error(f"✗ Failed to import LiveKit agents: {e}")
+        logger.warning(
+            f"⚠ LiveKit agents not available (expected on Vercel): {e}. "
+            "For voice agent functionality, deploy backend on Railway/Render with livekit-agents."
+        )
     
     yield
     

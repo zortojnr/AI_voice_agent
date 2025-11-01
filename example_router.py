@@ -25,7 +25,8 @@ router = APIRouter(prefix="/example", tags=["example"])
 async def test_livekit_import():
     """
     Test endpoint to verify LiveKit agents can be imported successfully.
-    This endpoint demonstrates that the tokenizer patch is working.
+    On Vercel, livekit-agents is not available (to stay under 250 MB limit).
+    Deploy backend on Railway/Render with requirements-vercel-backend.txt for full functionality.
     """
     try:
         # This import should work now thanks to tokenizer_patch.py
@@ -35,13 +36,17 @@ async def test_livekit_import():
             "status": "success",
             "message": "LiveKit agents imported successfully",
             "patch_applied": True,
+            "backend": "full",
         }
     except ImportError as e:
-        logger.error(f"Failed to import LiveKit agents: {e}")
-        raise HTTPException(
-            status_code=500,
-            detail=f"LiveKit agents import failed: {str(e)}",
-        )
+        # On Vercel, this is expected - livekit-agents not included to stay under 250 MB
+        logger.warning(f"LiveKit agents not available: {e}. This is expected on Vercel.")
+        return {
+            "status": "partial",
+            "message": "LiveKit agents not available (expected on Vercel deployment)",
+            "note": "Deploy backend on Railway/Render with requirements-vercel-backend.txt for full functionality",
+            "error": str(e),
+        }
 
 
 @router.get("/info")
