@@ -1,0 +1,10 @@
+{
+  "name": "ai-voice-agent-frontend",
+  "version": "1.0.0",
+  "description": "Frontend for AI Voice Agent",
+  "type": "module",
+  "scripts": {
+    "dev": "echo 'No build step required'"
+  }
+}
+
