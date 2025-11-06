@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="backend-url" content="https://ai-voice-agent-backend.onrender.com">
+    <title>AI Voice Agent</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🎙️ AI Voice Agent</h1>
+            <p class="subtitle">Interact with your voice agent using text or audio</p>
+        </header>
+
+        <main>
+            <!-- Input Section -->
+            <section class="input-section">
+                <div class="input-container">
+                    <label for="text-input">Enter your message:</label>
+                    <textarea 
+                        id="text-input" 
+                        placeholder="Type your message here or use the record button below..."
+                        rows="4"
+                    ></textarea>
+                    
+                    <div class="button-group">
+                        <button id="record-btn" class="btn btn-primary" disabled>
+                            🎤 Record Audio
+                        </button>
+                        <button id="stop-btn" class="btn btn-secondary" disabled>
+                            ⏹️ Stop Recording
+                        </button>
+                        <button id="submit-btn" class="btn btn-success">
+                            ➤ Send Message
+                        </button>
+                        <button id="clear-btn" class="btn btn-secondary">
+                            🗑️ Clear
+                        </button>
+                    </div>
+
+                    <div id="recording-status" class="status-indicator hidden">
+                        <span class="pulse"></span>
+                        Recording...
+                    </div>
+
+                    <div id="audio-preview" class="audio-preview hidden">
+                        <p>Audio recorded:</p>
+                        <audio id="recorded-audio" controls></audio>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Response Section -->
+            <section class="response-section">
+                <h2>Response</h2>
+                <div id="response-container" class="response-container">
+                    <p class="placeholder">Your response will appear here...</p>
+                </div>
+
+                <div id="audio-response" class="audio-response hidden">
+                    <h3>Audio Response:</h3>
+                    <audio id="response-audio" controls></audio>
+                </div>
+            </section>
+
+            <!-- Status Section -->
+            <section class="status-section">
+                <div id="status-message" class="status-message hidden"></div>
+                <div id="error-message" class="error-message hidden"></div>
+            </section>
+        </main>
+
+        <footer>
+            <p>Backend API: <span id="backend-url">Loading...</span></p>
+        </footer>
+    </div>
+
+    <script src="api/call_backend.js"></script>
+    <script src="main.js"></script>
+</body>
+</html>
+
